@@ -13,12 +13,18 @@
 		'crm',
 		'account',
 		'sale_brand',
+		'partner_brand',
+		'purchase_brand',
+		'hr_expense_brand',
+		'skit_account_reports',
+		'brand_external_report_layout',
+		'bi_import_bank_statement_line',
 	],
 	'data': [
 		# data
 		'data/crm_team_data.xml',
-		'data/res_brand_data.xml',
 		'data/analytic_account_data.xml',
+		'data/res_brand_data.xml',
 		# security
 		'security/res_groups.xml',
 		'security/ir_rule.xml',

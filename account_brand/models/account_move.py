@@ -10,3 +10,9 @@ class AccountMove(models.Model):
 
     brand_id = fields.Many2one(states={'open': [('readonly', True)], 'in_payment': [('readonly', True)], 'paid': [('readonly', True)],
                                        'cancel': [('readonly', True)]})
+
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    brand_id = fields.Many2one(related='move_id.brand_id', readonly=True, store=True)

@@ -7,5 +7,7 @@ from odoo import fields, models
 class ResConfigSetting(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    brand_use_level = fields.Selection([('no', 'Do not use brands on business document'), ('optional', 'Optional'),
-                                        ('required', 'Required')], 'Brand Use Level', default='no', related='company_id.brand_use_level')
+    brand_use_level = fields.Selection([('no', 'Do not use brands on business document'),
+                                        ('optional', 'Optional'),
+                                        ('required', 'Required')], 'Brand Use Level',
+                                       default='no', related='company_id.brand_use_level', readonly=False)
