@@ -8,8 +8,8 @@ class HrExpense(models.Model):
 	_name = 'hr.expense'
 	_inherit = ['hr.expense', 'res.brand.mixin']
 
-	brand_id = fields.Many2one(states={'sent': [('readonly', True)], 'sale': [('readonly', True)], 'done': [('readonly', True)],
-	                                   'cancel': [('readonly', True)]})
+	brand_id = fields.Many2one(states={'reported': [('readonly', True)], 'approved': [('readonly', True)], 'done': [('readonly', True)],
+	                                   'refused': [('readonly', True)]})
 
 	@api.onchange('brand_id')
 	def _onchange_brand_id(self):

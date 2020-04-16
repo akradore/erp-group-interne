@@ -24,6 +24,5 @@ class ResBrand(models.Model):
         """
         if self._context.get('search_brand_by_company'):
             args.append(('company_id', '=', self._context.get('search_brand_by_company')))
-            import pdb; pdb.set_trace()
         return super(ResBrand, self)._search(args, offset=offset, limit=limit, order=order, count=count,
                                              access_rights_uid=access_rights_uid)
