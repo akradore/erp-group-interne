@@ -21,3 +21,9 @@ class PurchaseOrder(models.Model):
 		result['context']['default_brand_id'] = self.brand_id.id
 		return result
 
+
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    brand_id = fields.Many2one(related='order_id.brand_id', readonly=True, store=True)
+
