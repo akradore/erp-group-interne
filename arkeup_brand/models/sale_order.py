@@ -10,8 +10,8 @@ class SaleOrder(models.Model):
 	@api.model
 	def default_get(self, list_fields):
 		res = super(SaleOrder, self).default_get(list_fields)
-		if self.env.user.brand_id:
-			res.update({'brand_id': self.env.user.brand_id.id})
+		if self.env.user.brand_ids:
+			res.update({'brand_id': self.env.user.brand_ids[0].id})
 		return res
 
 	@api.onchange('brand_id')
