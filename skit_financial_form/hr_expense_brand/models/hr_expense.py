@@ -15,8 +15,3 @@ class HrExpense(models.Model):
 	def _onchange_brand_id(self):
 		super(HrExpense, self)._onchange_brand_id()
 		self.update({'analytic_account_id': self.brand_id.analytic_account_id.id})
-
-	def _prepare_move_values(self):
-		result = super(HrExpense, self)._prepare_move_values()
-		result.update({'brand_id': self.brand_id.id})
-		return result
