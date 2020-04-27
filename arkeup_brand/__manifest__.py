@@ -26,7 +26,6 @@
 		'data/analytic_account_data.xml',
 		'data/res_brand_data.xml',
 		# security
-		'security/res_groups.xml',
 		'security/ir_rule.xml',
 		# views
 		'views/res_brand_view.xml',

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data noupdate="0">
+	<data noupdate="1">
 		
 		<record id="analytic_account_reunion" model="account.analytic.account">
 			<field name="name">ArkeUp Réunion</field>
