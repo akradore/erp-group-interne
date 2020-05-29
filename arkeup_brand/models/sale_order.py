@@ -30,3 +30,4 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     brand_id = fields.Many2one(related='order_id.brand_id', readonly=True, store=True)
+# TODO: skip tests odoo runbot
