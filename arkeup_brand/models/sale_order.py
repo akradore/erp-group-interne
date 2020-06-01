@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
     def default_get(self, list_fields):
         res = super(SaleOrder, self).default_get(list_fields)
         if self.env.user.brand_ids:
-            res.update({'brand_id': self.env.user.brand_ids[0].id})
+            res.update({'brand_id': self.env.user.brand_ids[0].id, 'team_id': self.env.user.brand_ids[0].team_id.id})
         return res
 
     @api.onchange('brand_id')
@@ -20,10 +20,17 @@ class SaleOrder(models.Model):
         for rec in self:
             vals = {}
             if rec.brand_id.team_id:
-                vals.update({'team_id': rec.brand_id.team_id})
+                vals.update({'team_id': rec.brand_id.team_id.id})
             if rec.brand_id.analytic_account_id:
-                vals.update({'analytic_account_id': rec.brand_id.analytic_account_id})
+                vals.update({'analytic_account_id': rec.brand_id.analytic_account_id.id})
             rec.update(vals)
+
+    @api.onchange('user_id')
+    def onchange_user_id(self):
+        res = super(SaleOrder, self).onchange_user_id()
+        if self.brand_id:
+            self.update({'team_id': self.brand_id.team_id.id})
+        return res
 
 
 class SaleOrderLine(models.Model):
