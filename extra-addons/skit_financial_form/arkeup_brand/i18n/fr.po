@@ -1,0 +1,77 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* arkeup_brand
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-15 13:47+0000\n"
+"PO-Revision-Date: 2020-04-15 13:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: arkeup_brand
+#: model:ir.model.fields,field_description:arkeup_brand.field_res_brand__analytic_account_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: arkeup_brand
+#: model:res.groups,name:arkeup_brand.res_group_brand_reunion
+msgid "ArkeUp Réunion Group Manager"
+msgstr ""
+
+#. module: arkeup_brand
+#: model:ir.model,name:arkeup_brand.model_res_brand
+#: model:ir.module.category,description:arkeup_brand.module_category_brand
+msgid "Brand"
+msgstr "Image de marque"
+
+#. module: arkeup_brand
+#: model:ir.module.category,name:arkeup_brand.module_category_brand
+msgid "Brand Security Strategy"
+msgstr "Sécurité des images de marque"
+
+#. module: arkeup_brand
+#: model:ir.model.fields,field_description:arkeup_brand.field_res_users__brand_ids
+msgid "Brands"
+msgstr "Images de marque"
+
+#. module: arkeup_brand
+#: model:crm.team,name:arkeup_brand.crm_team_reunion
+msgid "Equipe ArkeUp Réunion"
+msgstr ""
+
+#. module: arkeup_brand
+#: model:res.groups,name:arkeup_brand.res_group_brand_manager
+msgid "Manager"
+msgstr "Administrateur"
+
+#. module: arkeup_brand
+#: model:res.groups,name:arkeup_brand.res_group_brand_responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: arkeup_brand
+#: model:ir.model,name:arkeup_brand.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: arkeup_brand
+#: model:ir.model.fields,field_description:arkeup_brand.field_res_brand__team_id
+msgid "Sales Team"
+msgstr "Équipe commerciale"
+
+#. module: arkeup_brand
+#: model:res.groups,name:arkeup_brand.res_group_brand_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: arkeup_brand
+#: model:ir.model,name:arkeup_brand.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"

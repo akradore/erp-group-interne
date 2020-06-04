@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		
+		<record id="ir_rule_res_brand_user" model="ir.rule">
+			<field name="name">See Only My Brands</field>
+			<field name="model_id" ref="brand.model_res_brand"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="groups" eval="[(4,ref('base.group_user'))]"/>
+			<field name="domain_force">[('id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_res_brand_manager" model="ir.rule">
+			<field name="name">See All Brands</field>
+			<field name="model_id" ref="brand.model_res_brand"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="groups" eval="[(4,ref('base.group_erp_manager'))]"/>
+			<field name="domain_force">[(1,'=',1)]</field>
+		</record>
+		
+		<record id="ir_rule_only_my_sale_order" model="ir.rule">
+			<field name="name">Sale Order Of My Brands</field>
+			<field name="model_id" ref="sale.model_sale_order"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_only_my_sale_order_line" model="ir.rule">
+			<field name="name">Sale Order Line Of My Brands</field>
+			<field name="model_id" ref="sale.model_sale_order_line"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_account_move_brands" model="ir.rule">
+			<field name="name">Account Move Of My Brands</field>
+			<field name="model_id" ref="account.model_account_move"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_account_move_line_brands" model="ir.rule">
+			<field name="name">Account Move Line Of My Brands</field>
+			<field name="model_id" ref="account.model_account_move_line"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_account_analytic_account" model="ir.rule">
+			<field name="name">Analytic Account Of My Brands</field>
+			<field name="model_id" ref="account.model_account_analytic_account"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_account_analytic_line" model="ir.rule">
+			<field name="name">Analytic Entries Of My Brands</field>
+			<field name="model_id" ref="account.model_account_analytic_line"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_purchase_order" model="ir.rule">
+			<field name="name">Purchase Order Of My Brands</field>
+			<field name="model_id" ref="purchase.model_purchase_order"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_purchase_order_line" model="ir.rule">
+			<field name="name">Purchase Order Line Of My Brands</field>
+			<field name="model_id" ref="purchase.model_purchase_order_line"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+		
+		<record id="ir_rule_hr_expense_brand" model="ir.rule">
+			<field name="name">HR Expenses Of My Brands</field>
+			<field name="model_id" ref="hr_expense.model_hr_expense"/>
+			<field name="perm_create" eval="1"/>
+			<field name="perm_write" eval="1"/>
+			<field name="perm_unlink" eval="1"/>
+			<field name="perm_read" eval="1"/>
+			<field name="domain_force">['|',('brand_id','=',False),('brand_id','in',user.get_my_brands())]</field>
+		</record>
+	
+	</data>
+</odoo>
