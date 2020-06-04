@@ -8,7 +8,6 @@ from dateutil.relativedelta import relativedelta
 
 
 class ReportAgedPartnerBalance(models.AbstractModel):
-
     _name = 'report.skit_account_reports.report_agedpartnerbalance'
     _description = 'Aged Partner Balance Report'
 
@@ -30,14 +29,14 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         start = date_from - relativedelta(days=1)
         for i in range(5)[::-1]:
             stop = start - relativedelta(days=period_length)
-            period_name = str((5-(i+1)) * period_length + 1) + '-' + str((5-i) * period_length)
+            period_name = str((5 - (i + 1)) * period_length + 1) + '-' + str((5 - i) * period_length)
             period_stop = (start - relativedelta(days=1)).strftime('%Y-%m-%d')
             if i == 0:
                 period_name = '+' + str(4 * period_length)
             periods[str(i)] = {
                 'name': period_name,
                 'stop': period_stop,
-                'start': (i!=0 and stop.strftime('%Y-%m-%d') or False),
+                'start': (i != 0 and stop.strftime('%Y-%m-%d') or False),
             }
             start = stop
 
@@ -50,7 +49,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         if target_move == 'posted':
             move_state = ['posted']
         arg_list = (tuple(move_state), tuple(account_type))
-        #build the reconciliation clause to see what partner needs to be printed
+        # build the reconciliation clause to see what partner needs to be printed
         reconciliation_clause = '(l.reconciled IS FALSE)'
         cr.execute('SELECT debit_move_id, credit_move_id FROM account_partial_reconcile where create_date > %s', (date_from,))
         reconciled_after_date = []
@@ -143,7 +142,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
                         'line': line,
                         'amount': line_amount,
                         'period': i + 1,
-                        })
+                    })
             history.append(partners_amount)
 
         # This dictionary will store the not due amount of all partners
@@ -211,7 +210,8 @@ class ReportAgedPartnerBalance(models.AbstractModel):
             values['partner_id'] = partner['partner_id']
             if partner['partner_id']:
                 browsed_partner = self.env['res.partner'].browse(partner['partner_id'])
-                values['name'] = browsed_partner.name and len(browsed_partner.name) >= 45 and browsed_partner.name[0:40] + '...' or browsed_partner.name
+                values['name'] = browsed_partner.name and len(browsed_partner.name) >= 45 and browsed_partner.name[
+                                                                                              0:40] + '...' or browsed_partner.name
                 values['trust'] = browsed_partner.trust
             else:
                 values['name'] = _('Unknown Partner')
@@ -227,7 +227,6 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         if not data.get('form') or not self.env.context.get('active_model') or not self.env.context.get('active_id'):
             raise UserError(_("Form content is missing, this report cannot be printed."))
 
-       
         model = self.env.context.get('active_model')
         docs = self.env[model].browse(self.env.context.get('active_id'))
 

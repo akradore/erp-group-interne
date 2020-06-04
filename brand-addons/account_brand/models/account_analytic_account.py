@@ -5,11 +5,11 @@ from odoo import fields, models
 
 
 class AccountAnalyticAccount(models.Model):
-	_name = 'account.analytic.account'
-	_inherit = ['account.analytic.account', 'res.brand.mixin']
+    _name = 'account.analytic.account'
+    _inherit = ['account.analytic.account', 'res.brand.mixin']
 
 
 class AccountAnalyticLine(models.Model):
-	_inherit = 'account.analytic.line'
+    _inherit = 'account.analytic.line'
 
-	brand_id = fields.Many2one(related='account_id.brand_id', readony=True, store=True)
+    brand_id = fields.Many2one(related='account_id.brand_id', readony=True, store=True)

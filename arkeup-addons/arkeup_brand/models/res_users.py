@@ -5,11 +5,11 @@ from odoo import models, fields
 
 
 class ResUsers(models.Model):
-	_inherit = 'res.users'
+    _inherit = 'res.users'
 
-	brand_ids = fields.Many2many('res.brand', string='Brands',
-	                             domain="['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]")
+    brand_ids = fields.Many2many('res.brand', string='Brands',
+                                 domain="['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]")
 
-	def get_my_brands(self):
-		self.ensure_one()
-		return self.brand_ids.ids
+    def get_my_brands(self):
+        self.ensure_one()
+        return self.brand_ids.ids

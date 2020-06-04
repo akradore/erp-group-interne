@@ -17,9 +17,9 @@
         'security/ir.model.access.csv',
         'views/account_financial_report_data.xml',
         'views/account_menuitem.xml',
-        'views/account_view.xml',   
+        'views/account_view.xml',
     ],
-    'installable': True,    
+    'installable': True,
     'auto_install': False,
     'application': True,
 }

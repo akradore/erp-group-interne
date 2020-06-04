@@ -3,6 +3,7 @@
 
 from odoo import api, models, fields
 
+
 # ---------------------------------------------------------
 # Account Financial Report
 # ---------------------------------------------------------
@@ -12,7 +13,6 @@ class account_financial_report(models.Model):
     _name = "account.financial.report"
     _description = "Account Report"
 
-    
     @api.depends('parent_id', 'parent_id.level')
     def _get_level(self):
         '''Returns a dictionary with key=the ID of a record and value = the level of this  
@@ -42,17 +42,18 @@ class account_financial_report(models.Model):
         ('accounts', 'Accounts'),
         ('account_type', 'Account Type'),
         ('account_report', 'Report Value'),
-        ], 'Type', default='sum')
+    ], 'Type', default='sum')
     account_ids = fields.Many2many('account.account', 'account_account_financial_report', 'report_line_id', 'account_id', 'Accounts')
     account_report_id = fields.Many2one('account.financial.report', 'Report Value')
-    account_type_ids = fields.Many2many('account.account.type', 'account_account_financial_report_type', 'report_id', 'account_type_id', 'Account Types')
+    account_type_ids = fields.Many2many('account.account.type', 'account_account_financial_report_type', 'report_id', 'account_type_id',
+                                        'Account Types')
     sign = fields.Selection([('-1', 'Reverse balance sign'), ('1', 'Preserve balance sign')], 'Sign on Reports', required=True, default="1",
                             help='For accounts that are typically more debited than credited and that you would like to print as negative amounts in your reports, you should reverse the sign of the balance; e.g.: Expense account. The same applies for accounts that are typically more credited than debited and that you would like to print as positive amounts in your reports; e.g.: Income account.')
     display_detail = fields.Selection([
         ('no_detail', 'No detail'),
         ('detail_flat', 'Display children flat'),
         ('detail_with_hierarchy', 'Display children with hierarchy')
-        ], 'Display details', default='detail_flat')
+    ], 'Display details', default='detail_flat')
     style_overwrite = fields.Selection([
         ('0', 'Automatic formatting'),
         ('1', 'Main Title 1 (bold, underlined)'),
@@ -61,5 +62,5 @@ class account_financial_report(models.Model):
         ('4', 'Normal Text'),
         ('5', 'Italic Text (smaller)'),
         ('6', 'Smallest Text'),
-        ], 'Financial Report Style', default=0,
+    ], 'Financial Report Style', default=0,
         help="You can set up here the format you want this record to be displayed. If you leave the automatic formatting, it will be computed based on the financial reports hierarchy (auto-computed field 'level').")

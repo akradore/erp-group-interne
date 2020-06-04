@@ -145,14 +145,14 @@ xls Importación de extracto de caja
     "price": 12.00,
     "currency": 'EUR',
     'website': 'http://www.browseinfo.in',
-    'depends': ['base','account'],
+    'depends': ['base', 'account'],
     'data': ["views/bank_statement.xml"
              ],
-	'qweb': ['static/src/xml/account_reconciliation.xml'],
+    'qweb': ['static/src/xml/account_reconciliation.xml'],
     'demo': [],
     'test': [],
     'installable': True,
     'auto_install': False,
-    "images":['static/description/Banner.png'],
+    "images": ['static/description/Banner.png'],
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

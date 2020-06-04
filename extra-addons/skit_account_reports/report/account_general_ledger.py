@@ -32,7 +32,8 @@ class ReportGeneralLedger(models.AbstractModel):
 
         # Prepare initial sql query and Get the initial move lines
         if init_balance:
-            init_where_clause, init_where_params = MoveLine.with_context(date_from=self.env.context.get('date_from'), date_to=False, initial_bal=True)._query_get()
+            init_where_clause, init_where_params = MoveLine.with_context(date_from=self.env.context.get('date_from'), date_to=False,
+                                                                         initial_bal=True)._query_get()
             init_wheres = [""]
             if init_where_clause.strip():
                 init_wheres.append(init_where_clause.strip())
@@ -124,7 +125,8 @@ class ReportGeneralLedger(models.AbstractModel):
             codes = [journal.code for journal in self.env['account.journal'].search([('id', 'in', data['form']['journal_ids'])])]
 
         accounts = docs if self.model == 'account.account' else self.env['account.account'].search([])
-        accounts_res = self.with_context(data['form'].get('used_context',{}))._get_account_move_entry(accounts, init_balance, sortby, display_account)
+        accounts_res = self.with_context(data['form'].get('used_context', {}))._get_account_move_entry(accounts, init_balance, sortby,
+                                                                                                       display_account)
         return {
             'doc_ids': docids,
             'doc_model': self.model,

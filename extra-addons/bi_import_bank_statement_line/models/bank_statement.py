@@ -7,6 +7,7 @@ import logging
 from datetime import datetime
 from odoo.exceptions import Warning
 from odoo import models, fields, api, exceptions, _
+
 _logger = logging.getLogger(__name__)
 from io import StringIO
 import io
@@ -28,7 +29,6 @@ try:
 except ImportError:
     _logger.debug('Cannot `import base64`.')
 
-
 try:
     import xlrd
 except ImportError:
@@ -36,22 +36,22 @@ except ImportError:
 
 
 class account_bank_statement_wizard(models.TransientModel):
-    _name= "account.bank.statement.wizard"
+    _name = "account.bank.statement.wizard"
 
     file = fields.Binary('File')
-    file_opt = fields.Selection([('excel','Excel'),('csv','CSV')])
+    file_opt = fields.Selection([('excel', 'Excel'), ('csv', 'CSV')])
 
     def import_file(self):
-        #if not file:
+        # if not file:
         #    raise Warning('Please Select File')
         if self.file_opt == 'csv':
-            keys = ['date','ref','partner','memo','amount','currency','note']
+            keys = ['date', 'ref', 'partner', 'memo', 'amount', 'currency', 'note']
             data = base64.b64decode(self.file)
             file_input = io.StringIO(data.decode("utf-8"))
             file_input.seek(0)
             reader_info = []
             reader = csv.reader(file_input, delimiter=',')
- 
+
             try:
                 reader_info.extend(reader)
             except Exception:
@@ -74,24 +74,25 @@ class account_bank_statement_wizard(models.TransientModel):
             sheet = workbook.sheet_by_index(0)
             for row_no in range(sheet.nrows):
                 if row_no <= 0:
-                    fields = list(map(lambda row:row.value.encode('utf-8'), sheet.row(row_no)))
+                    fields = list(map(lambda row: row.value.encode('utf-8'), sheet.row(row_no)))
                 else:
-                    line = list(map(lambda row:isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value), sheet.row(row_no)))
+                    line = list(
+                        map(lambda row: isinstance(row.value, str) and row.value.encode('utf-8') or str(row.value), sheet.row(row_no)))
                     if not line[0]:
                         raise Warning('Please Provide Date Field Value')
                     a1 = int(float(line[0]))
                     a1_as_datetime = datetime(*xlrd.xldate_as_tuple(a1, workbook.datemode))
                     date_string = a1_as_datetime.date().strftime('%Y-%m-%d')
 
-                    note =''
-                    memo =''
+                    note = ''
+                    memo = ''
                     if line[1] == '':
                         ref = ''
                     else:
                         ref = line[1].decode("utf-8")
 
-                    if line[3]  == '':
-                        memo =''
+                    if line[3] == '':
+                        memo = ''
                     else:
                         memo = line[3].decode("utf-8")
 
@@ -100,21 +101,21 @@ class account_bank_statement_wizard(models.TransientModel):
                     else:
                         note = line[6].decode("utf-8")
 
-                    values.update( {'date':date_string,
-                                    'ref': ref,
-                                    'partner': line[2],
-                                    'memo': memo,
-                                    'amount': line[4],
-                                    'currency' : line[5],
-                                    'note' : note,
-                                    })
+                    values.update({'date': date_string,
+                                   'ref': ref,
+                                   'partner': line[2],
+                                   'memo': memo,
+                                   'amount': line[4],
+                                   'currency': line[5],
+                                   'note': note,
+                                   })
                     res = self._create_statement_lines(values)
         else:
             raise Warning('Please Select File Type')
         self.env['account.bank.statement'].browse(self._context.get('active_id'))._end_balance()
         return res
 
-    def _create_statement_lines(self,val):
+    def _create_statement_lines(self, val):
         account_bank_statement_line_obj = self.env['account.bank.statement.line']
         partner_id = self._find_partner(val.get('partner'))
         if val.get('currency'):
@@ -131,29 +132,28 @@ class account_bank_statement_wizard(models.TransientModel):
             raise Warning('Please Provide Memo Field Value')
 
         account_bank_statement_line_obj.create({
-            'date':val.get('date'),
-            'ref':val.get('ref'),
-            'partner_id':partner_id,
-            'name':val.get('memo'),
-            'amount':val.get('amount'),
-            'currency_id':currency_id ,
-            'note':val.get('note'),
-            'statement_id':self._context.get('active_id'),
+            'date': val.get('date'),
+            'ref': val.get('ref'),
+            'partner_id': partner_id,
+            'name': val.get('memo'),
+            'amount': val.get('amount'),
+            'currency_id': currency_id,
+            'note': val.get('note'),
+            'statement_id': self._context.get('active_id'),
         })
         return True
-#
-    def _find_partner(self,name):
-        partner_id = self.env['res.partner'].search([('name','=',name)])
+
+    #
+    def _find_partner(self, name):
+        partner_id = self.env['res.partner'].search([('name', '=', name)])
         if partner_id:
             return partner_id.id
         else:
             return
 
-    def _find_currency(self,currency):
-        currency_id = self.env['res.currency'].search([('name','=',currency)])
+    def _find_currency(self, currency):
+        currency_id = self.env['res.currency'].search([('name', '=', currency)])
         if currency_id:
             return currency_id.id
         else:
             raise Warning(_(' "%s" Currency are not available.') % currency)
-
-
