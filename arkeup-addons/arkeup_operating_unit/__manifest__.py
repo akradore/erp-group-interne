@@ -6,7 +6,7 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'category': 'Generic',
-    'depends': ['purchase_operating_unit'],
+    'depends': ['purchase_operating_unit', 'account_operating_unit', 'hr_expense_operating_unit'],
     'license': 'LGPL-3',
     'data': [
         # security
